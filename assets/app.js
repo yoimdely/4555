@@ -9,6 +9,8 @@
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          const delay = entry.target.dataset.delay || "0";
+          entry.target.style.transitionDelay = `${delay}ms`;
           entry.target.classList.add("is-visible");
           observer.unobserve(entry.target);
         }
@@ -71,9 +73,19 @@ const initForms = () => {
   });
 };
 
+const initReviews = () => {
+  const reviews = document.querySelectorAll("details.review-card");
+  if (!reviews.length) return;
+  if (window.innerWidth <= 960) {
+    reviews.forEach((item) => item.removeAttribute("open"));
+  } else {
+    reviews.forEach((item) => item.setAttribute("open", ""));
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initMobileMenu();
   initForms();
+  initReviews();
 });
-

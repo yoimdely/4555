@@ -7,20 +7,28 @@
   --accent: #ad7f5c;
   --line: #e6ddd2;
   --white: #ffffff;
-  --shadow-card: 0 20px 50px -35px rgba(22, 23, 26, 0.35);
-  --shadow-soft: 0 12px 30px -18px rgba(22, 23, 26, 0.28);
+  --shadow-card: 0 25px 60px -35px rgba(22, 23, 26, 0.35);
+  --shadow-soft: 0 16px 35px -22px rgba(22, 23, 26, 0.28);
 }
 
-* {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
+* {\n  box-sizing: border-box;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}
 
 body {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
-  background: var(--sand);
+  background: radial-gradient(circle at top, #fbf7f1 0%, #f2e8db 40%, #f7f2ea 100%);
   color: var(--graphite);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20% 0 auto 0;
+  height: 420px;
+  background: radial-gradient(circle at 20% 20%, rgba(173, 127, 92, 0.25), transparent 55%),
+    radial-gradient(circle at 80% 10%, rgba(200, 184, 166, 0.35), transparent 60%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 h1, h2, h3, h4 {
@@ -54,6 +62,10 @@ img {
   padding: 80px 0;
 }
 
+.section.alt,\n.section-tight.alt {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(247, 242, 234, 0.2));
+}
+
 .section-tight {
   padding: 56px 0;
 }
@@ -63,6 +75,12 @@ img {
   border: 1px solid var(--line);
   border-radius: 24px;
   box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px -40px rgba(22, 23, 26, 0.4);
 }
 
 .card-lg {
@@ -94,9 +112,9 @@ img {
   position: sticky;
   top: 0;
   z-index: 40;
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(8px);
-  background: rgba(247, 242, 234, 0.92);
+  border-bottom: 1px solid rgba(230, 221, 210, 0.8);
+  backdrop-filter: blur(12px);
+  background: rgba(247, 242, 234, 0.9);
 }
 
 .header-inner {
@@ -104,7 +122,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 0;
+  padding: 18px 0;
 }
 
 .logo {
@@ -114,10 +132,10 @@ img {
 }
 
 .logo-badge {
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   border-radius: 16px;
-  background: var(--white);
+  background: linear-gradient(135deg, #ffffff, #efe6da);
   display: grid;
   place-items: center;
   font-weight: 700;
@@ -125,21 +143,36 @@ img {
   box-shadow: var(--shadow-soft);
 }
 
+.logo strong {
+  font-size: 16px;
+}
+
 .nav {
   display: flex;
-  gap: 24px;
+  gap: 6px;
   font-size: 14px;
   font-weight: 600;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+
+.nav a {
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .nav a:hover {
+  background: rgba(173, 127, 92, 0.12);
   color: var(--accent);
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .button {
@@ -152,18 +185,25 @@ img {
   font-size: 14px;
   font-weight: 600;
   border: 1px solid transparent;
-  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .button-primary {
   background: var(--graphite);
   color: var(--white);
+  box-shadow: 0 12px 25px -18px rgba(31, 35, 40, 0.6);
 }
 
 .button-outline {
   background: var(--white);
   border-color: var(--line);
   color: var(--graphite);
+}
+
+.button-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--slate);
 }
 
 .button:hover {
@@ -177,7 +217,7 @@ img {
   padding: 8px 14px;
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.9);
   font-size: 12px;
   color: rgba(47, 54, 64, 0.7);
   box-shadow: var(--shadow-soft);
@@ -197,7 +237,7 @@ img {
 }
 
 .hero-title {
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(34px, 4vw, 56px);
   line-height: 1.1;
 }
 
@@ -211,7 +251,7 @@ img {
   padding: 16px;
   border-radius: 18px;
   border: 1px solid var(--line);
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .lead-form {
@@ -247,8 +287,8 @@ img {
 
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .reveal.is-visible {
@@ -258,7 +298,7 @@ img {
 
 .footer {
   border-top: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .footer-grid {
@@ -375,7 +415,7 @@ img {
   content: "";
   position: absolute;
   border-radius: 50%;
-  filter: blur(48px);
+  filter: blur(55px);
   z-index: -1;
 }
 
@@ -395,13 +435,31 @@ img {
   bottom: 60px;
 }
 
+.hero-float {
+  position: absolute;
+  width: 150px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.hero-float.one {
+  top: 40px;
+  right: -20px;
+}
+
+.hero-float.two {
+  bottom: 120px;
+  left: -30px;
+}
+
 .project-card img {
   height: 200px;
   object-fit: cover;
 }
 
 .section-title {
-  font-size: clamp(26px, 3vw, 40px);
+  font-size: clamp(28px, 3vw, 42px);
   margin-bottom: 8px;
 }
 
@@ -409,3 +467,81 @@ img {
   color: rgba(47, 54, 64, 0.7);
 }
 
+.service-thumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 12px;
+}
+
+.service-card {
+  display: block;
+  padding: 20px;
+}
+
+\n.service-banner {\n  width: 100%;\n  height: 240px;\n  object-fit: cover;\n  border-radius: 24px;\n  margin-top: 18px;\n  box-shadow: var(--shadow-soft);\n}\n
+
+.review-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.review-card summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.review-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.review-card .review-meta {
+  font-size: 12px;
+  color: rgba(47, 54, 64, 0.6);
+}
+
+.review-card .review-type {
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.review-card .review-body {
+  padding: 0 16px 16px 16px;
+  font-size: 13px;
+  color: rgba(47, 54, 64, 0.7);
+  line-height: 1.5;
+}
+
+.review-card[open] summary {
+  background: rgba(247, 242, 234, 0.5);
+}
+
+.review-card summary::after {
+  content: "Развернуть";
+  font-size: 11px;
+  color: rgba(47, 54, 64, 0.5);
+  justify-self: start;
+}
+
+.review-card[open] summary::after {
+  content: "Свернуть";
+}
+
+@media (max-width: 960px) {
+  .section {
+    padding: 64px 0;
+  }
+  .hero {
+    gap: 24px;
+  }
+  .container {
+    padding: 0 20px;
+  }
+  .reviews-grid {
+    gap: 16px;
+  }
+}
